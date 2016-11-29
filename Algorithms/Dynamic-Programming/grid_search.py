@@ -6,17 +6,18 @@ they are filled with Arts majors and it doesn't like them.
 
 
 def find_path(matrix, row, column, route, storage):
-    if column < 0 or row < 0 or (matrix[row][column] is False):
+    if column < 0 or row < 0 or (matrix[row][column] == 0):
         return False
     curr = (row, column)
 
     if curr in storage:
+        print("Current is: %s " % curr)
         return storage[curr]
 
     done_iter = False
     origin = row == 0 and column == 0
 
-    if origin or find_path(matrix, row-1, column, route, storage) or find_path(matrix, row, column-1, route, storage):
+    if origin or find_path(matrix, row - 1, column, route, storage) or find_path(matrix, row, column - 1, route, storage):
         route.append(curr)
         done_iter = True
 
@@ -31,6 +32,10 @@ def main():
         a = list(map(int, input().split(' ')))
         matrix.append(a)
     route = list()
-    if find_path(matrix, rows, columns, route, dict()):
+    if find_path(matrix, rows - 1, columns - 1, route, dict()):
         return route
     return None
+
+
+if __name__ == '__main__':
+    main()
