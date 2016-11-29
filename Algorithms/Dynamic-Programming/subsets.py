@@ -20,12 +20,22 @@ def combinations(iterable, r):
         print(tuple(pool[i] for i in indices))
 
 
+def get_subsets(iterable):
+    if iterable is None:
+        return None
+    subsets = [[]]
+    new_set = []
+    for n in iterable:
+        for s in subsets:
+            new_set.append(s + [n])
+        subsets += new_set
+        new_set = []
+    print(subsets)
+
+
 def main():
-    x = input().strip(' ')
-    s = list()
-    for i in range(1, len(x) + 1):
-        s.append(combinations(x, i))
-    print(s)
+    x = list(map(int, input().split(' ')))
+    get_subsets(x)
 
 
 if __name__ == '__main__':
